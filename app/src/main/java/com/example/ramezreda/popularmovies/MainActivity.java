@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         MoviesAdapter moviesAdapter = new MoviesAdapter(this, mMovies);
         moviesAdapter.setOnItemClickListener(this);
         rvMoviesList.setAdapter(moviesAdapter);
-//        moviesAdapter.notifyDataSetChanged();
 
     }
 
