@@ -1,6 +1,8 @@
 package com.example.ramezreda.popularmovies;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +15,13 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.ramezreda.popularmovies.adapters.MoviesAdapter;
+import com.example.ramezreda.popularmovies.data.FavoritesContract.FavoritesEntry;
 import com.example.ramezreda.popularmovies.loaders.MoviesListLoader;
 import com.example.ramezreda.popularmovies.models.Movie;
 import com.example.ramezreda.popularmovies.utils.JsonUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>,
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String TAG = "MainActivity";
     private static final java.lang.String EXTRA_URL = "url";
     private final int MOVIES_LIST_LOADER_ID = 1;
-    private final String URL = "http://api.themoviedb.org/3/movie/";
+
     private final String SORT_POPULAR = "popular";
     private final String SORT_TOP_RATED = "top_rated";
     private final String API_KEY = "?api_key=" + BuildConfig.API_KEY;
@@ -55,7 +60,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         super.onStart();
 
-        startLoader(0);
+        int sortIndex = spinnerSort.getSelectedItemPosition();
+        if(sortIndex == 2)
+            queryFavorites();
+        else
+            startLoader(sortIndex);
     }
 
     private void startLoader(int sortIndex) {
@@ -70,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String url = null;
 
         if(sortIndex == 0)
-            url = URL + SORT_POPULAR + API_KEY;
+            url = SuperGlobals.API_URL + SORT_POPULAR + API_KEY;
         else if(sortIndex == 1)
-            url = URL + SORT_TOP_RATED + API_KEY;
+            url = SuperGlobals.API_URL + SORT_TOP_RATED + API_KEY;
 
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_URL, url);
@@ -99,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         MoviesAdapter moviesAdapter = new MoviesAdapter(this, mMovies);
         moviesAdapter.setOnItemClickListener(this);
         rvMoviesList.setAdapter(moviesAdapter);
-
     }
 
     @Override
@@ -116,7 +124,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        startLoader(i);
+        if(i == 2) // Favorites selected
+            queryFavorites();
+        else
+            startLoader(i);
+    }
+
+    private void queryFavorites() {
+        Uri uri = FavoritesEntry.CONTENT_URI;
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+
+        mMovies = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Movie movie = new Movie(
+                    cursor.getInt(cursor.getColumnIndex(FavoritesEntry.COLUMN_ID)),
+                    cursor.getString(cursor.getColumnIndex(FavoritesEntry.COLUMN_TITLE)),
+                    cursor.getString(cursor.getColumnIndex(FavoritesEntry.COLUMN_POSTER_PATH)),
+                    cursor.getString(cursor.getColumnIndex(FavoritesEntry.COLUMN_OVERVIEW)),
+                    cursor.getDouble(cursor.getColumnIndex(FavoritesEntry.COLUMN_VOTE_AVERAGE)),
+                    cursor.getString(cursor.getColumnIndex(FavoritesEntry.COLUMN_RELEASE_DATE))
+                    );
+            mMovies.add(movie);
+        }
+
+        MoviesAdapter moviesAdapter = new MoviesAdapter(this, mMovies);
+        moviesAdapter.setOnItemClickListener(this);
+        rvMoviesList.setAdapter(moviesAdapter);
+        cursor.close();
     }
 
     @Override

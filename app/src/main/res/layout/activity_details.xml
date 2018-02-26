@@ -13,40 +13,31 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/black"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/favorite_button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintWidth_default="wrap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Movie Title"
-            android:layout_marginLeft="8dp" />
+            tools:text="Movie Title" />
 
         <ImageView
             android:id="@+id/poster"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="138dp"
+            android:layout_height="191dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:contentDescription="@string/poster_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:srcCompat="@android:drawable/ic_menu_gallery"
-            android:contentDescription="@string/poster_placeholder"
-            android:layout_marginLeft="8dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/release_date"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/poster"
-            app:layout_constraintTop_toBottomOf="@+id/title"
             android:layout_marginLeft="8dp" />
 
         <TextView
@@ -55,21 +46,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            tools:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            android:layout_marginLeft="8dp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/vote_average"
-            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/poster"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/vote_avg"
+            tools:text="TextView"
             android:layout_marginLeft="8dp" />
 
         <TextView
@@ -78,9 +57,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/poster"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/release_date"
             android:layout_marginLeft="8dp" />
 
         <TextView
@@ -108,5 +89,90 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             android:layout_marginLeft="8dp" />
+
+        <View
+            android:id="@+id/trailers_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plot" />
+
+        <TextView
+            android:id="@+id/trailers_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/trailers"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trailers_separator"
+            android:layout_marginLeft="8dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trailers_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trailers_label" />
+
+        <View
+            android:id="@+id/reviews_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trailers_recycler_view" />
+
+        <TextView
+            android:id="@+id/reviews_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/reviews"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviews_separator"
+            android:layout_marginLeft="8dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reviews_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviews_label" />
+
+        <ImageButton
+            android:id="@+id/favorite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/star_big_off"
+            android:layout_marginRight="8dp"
+            android:onClick="favoriteClicked"
+            android:contentDescription="@string/mark_as_favorite" />
+
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

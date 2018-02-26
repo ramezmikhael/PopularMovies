@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/poster_placeholder"
         android:scaleType="centerCrop"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
