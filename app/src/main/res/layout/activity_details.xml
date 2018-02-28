@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,72 +22,78 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/favorite_button"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintWidth_default="wrap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="wrap"
             tools:text="Movie Title" />
 
-        <ImageView
+        <android.support.v7.widget.CardView
             android:id="@+id/poster"
-            android:layout_width="138dp"
-            android:layout_height="191dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/poster_placeholder"
+            android:layout_width="183dp"
+            android:layout_height="270dp"
+            android:layout_margin="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:srcCompat="@android:drawable/ic_menu_gallery"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <ImageView
+                android:id="@+id/poster_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/poster_placeholder"
+                android:scaleType="centerCrop"
+                app:srcCompat="@android:drawable/ic_menu_gallery"
+                tools:layout_editor_absoluteX="114dp"
+                tools:layout_editor_absoluteY="57dp" />
+
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toBottomOf="@+id/vote_avg"
-            tools:text="TextView"
-            android:layout_marginLeft="8dp" />
+            tools:text="TextView" />
 
         <TextView
             android:id="@+id/vote_avg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:text="TextView"
-            android:layout_marginLeft="8dp" />
+            tools:text="TextView" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/plot_synopsis"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/poster" />
 
         <TextView
             android:id="@+id/plot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_goneMarginEnd="8dp"
-            android:padding="8dp"
-            tools:text="TextView"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            android:layout_marginLeft="8dp" />
+            app:layout_goneMarginEnd="8dp"
+            tools:text="TextView" />
 
         <View
             android:id="@+id/trailers_separator"
@@ -106,13 +111,13 @@
             android:id="@+id/trailers_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/trailers"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trailers_separator"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/trailers_separator" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/trailers_recycler_view"
@@ -141,13 +146,13 @@
             android:id="@+id/reviews_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/reviews"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reviews_separator"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/reviews_separator" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reviews_recycler_view"
@@ -165,14 +170,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:background="@null"
+            android:contentDescription="@string/mark_as_favorite"
+            android:onClick="favoriteClicked"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/star_big_off"
-            android:layout_marginRight="8dp"
-            android:onClick="favoriteClicked"
-            android:contentDescription="@string/mark_as_favorite" />
+            app:srcCompat="@android:drawable/star_big_off" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

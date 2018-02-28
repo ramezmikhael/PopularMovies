@@ -19,6 +19,9 @@
     <string name="mark_as_favorite">Mark as favorite</string>
     <string name="share_movie_trailer">Share Movie Trailer</string>
     <string name="share">Share</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="favorites">Favorites</string>
 
     <string-array name="sort_types">
         <item>Most Popular</item>

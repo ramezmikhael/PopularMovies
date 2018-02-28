@@ -81,7 +81,7 @@ public class DetailsActivity extends AppCompatActivity
         TextView releaseDate = findViewById(R.id.release_date);
         TextView plot = findViewById(R.id.plot);
         TextView voteAvg = findViewById(R.id.vote_avg);
-        ImageView poster = findViewById(R.id.poster);
+        ImageView poster = findViewById(R.id.poster_image);
 
         title.setText(mMovie.getTitle());
         releaseDate.setText(mMovie.getReleaseDate());
